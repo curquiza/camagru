@@ -2,6 +2,6 @@
 
 class Database {
 
-  const PATH_TO_SQLITE_FILE = 'db/phpsqlite.db';
+  const PATH_TO_SQLITE_FILE = 'db/camagru.db';
 
 }
