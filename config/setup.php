@@ -1,7 +1,6 @@
 <?php
 
 require_once 'app/connection.php';
-// require_once 'config/database.php';
 
 class SQLiteCreateTable {
 
@@ -12,23 +11,41 @@ class SQLiteCreateTable {
     }
 
     public function createTables() {
-        $commands = ['CREATE TABLE IF NOT EXISTS users (
-                        user_id      INTEGER PRIMARY KEY,
-                        pseudo       TEXT NOT NULL
-                      )'];
+        $commands = [
+          'CREATE TABLE IF NOT EXISTS users (
+            user_id      INTEGER PRIMARY KEY,
+            email        TEXT NOT NULL,
+            pseudo       TEXT NOT NULL,
+            password     TEXT NOT NULL,
+            status       TEXT NOT NULL,
+            created_at   DATETIME
+          );',
+         'CREATE TABLE IF NOT EXISTS photos (
+           photo_id     INTEGER PRIMARY KEY,
+           path         TEXT NOT NULL,
+           created_at   DATETIME,
+           user_id      INTEGER
+         );',
+         'CREATE TABLE IF NOT EXISTS comments (
+           comment_id   INTEGER PRIMARY KEY,
+           content      TEXT NOT NULL,
+           created_at   DATETIME,
+           updated_at   DATETIME,
+           user_id      INTEGER,
+           photo_id     INTEGER
+         );',
+         'CREATE TABLE IF NOT EXISTS likes (
+           like_id      INTEGER PRIMARY KEY,
+           user_id      INTEGER,
+           photo_id     INTEGER
+         );',
+       ];
         foreach ($commands as $command) {
             $this->pdo->exec($command);
         }
     }
-
-
 }
 
-
 $pdo = (new SQLiteConnection())->connect();
-if ($pdo != null)
-  echo "yes !";
-else
-  echo "raté";
 $sqlite = new SQLiteCreateTable($pdo);
 $sqlite->createTables();

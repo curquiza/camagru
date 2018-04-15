@@ -13,4 +13,8 @@ class SQLiteConnection {
     return $this->pdo;
   }
 
+  public function close() {
+
+  }
+
 }
