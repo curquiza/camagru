@@ -14,21 +14,21 @@
 
 ### Users
 ```
-GET     /users/:id          #show
-GET     /users/new          #new
-GET     /users/:id/edit     #edit
-POST    /users              #create
-PATCH   /users/:id          #update
-DELETE  /users/:id          #destroy
+GET     /users/:id                        #show
+GET     /users/new                        #new
+GET     /users/:id/edit                   #edit
+POST    /users                            #create
+PATCH   /users/:id                        #update
+DELETE  /users/:id                        #destroy
 ```
 
 ### Photos
 ```
-GET     /photos             #index
-GET     /photos/:id         #show
-GET     /photos/new         #new
-POST    /photos             #create
-DELETE  /photos/:id         #destroy
+GET     /photos                           #index
+GET     /photos/:id                       #show
+GET     /photos/new                       #new
+POST    /photos                           #create
+DELETE  /photos/:id                       #destroy
 ```
 
 ### Comments
