@@ -1,4 +1,15 @@
-<!DOCTYPE html>
+<?php
+
+$controller = 'users_controller';
+$class = 'UsersController';
+$method = 'new';
+$params = array();
+
+require_once 'app/controllers/' . $controller . '.php';
+call_user_func_array([$class, $method], $params);
+
+?>
+<!-- <!DOCTYPE html>
 <html>
 <head>
 	<link rel="stylesheet" href="css/spectre.css">
@@ -9,4 +20,4 @@
 <body>
 	<h1> COCO </h1>
 </body>
-</html>
+</html> -->
