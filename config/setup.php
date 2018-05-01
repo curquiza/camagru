@@ -46,7 +46,8 @@ class SQLiteCreateTable {
     }
 }
 
-$pdo = (new SQLiteConnection())->connect();
+$db = new SQLiteConnection();
+$pdo = $db->connect();
 if ($pdo != null)
 {
     echo 'Connected'.PHP_EOL;
@@ -56,3 +57,4 @@ if ($pdo != null)
 }
 else
     echo 'Error during connection'.PHP_EOL;
+$db->close();
