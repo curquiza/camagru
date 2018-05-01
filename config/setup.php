@@ -1,6 +1,6 @@
 <?php
 
-require_once 'app/connection.php';
+require_once 'app/models/connection.php';
 
 class SQLiteCreateTable {
 
@@ -47,5 +47,12 @@ class SQLiteCreateTable {
 }
 
 $pdo = (new SQLiteConnection())->connect();
-$sqlite = new SQLiteCreateTable($pdo);
-$sqlite->createTables();
+if ($pdo != null)
+{
+    echo 'Connected'.PHP_EOL;
+    $sqlite = new SQLiteCreateTable($pdo);
+    $sqlite->createTables();
+    echo 'Tables created'.PHP_EOL;
+}
+else
+    echo 'Error during connection'.PHP_EOL;
