@@ -4,7 +4,7 @@ require_once 'app/models/connection.php';
 
 class Base {
 
-    // getter
+    // ====== GETTER ======
     public function __get($property) {
         if (property_exists($this, $property)) {
             return $this->$property;
