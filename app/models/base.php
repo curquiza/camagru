@@ -11,14 +11,6 @@ class Base {
         }
     }
 
-    // ====== SQL ======
-    private static function sql_request($string) {
-        $db = new SQLiteConnection();
-        $pdo = $db->connect();
-        $pdo->exec($string);
-        $db->close();
-    }
-
     // ====== ORM ======
     // create : hash with no id
     public static function create($hash) {
@@ -39,6 +31,14 @@ class Base {
     }
 
     // ====== PRIVATE METHODS FOR ORM ======
+
+    private static function sql_request($string) {
+        $db = new SQLiteConnection();
+        $pdo = $db->connect();
+        $pdo->exec($string);
+        $db->close();
+    }
+
     private static function get_create_request_str($hash) {
         $columns_str = self::get_columns($hash);
         $values_str = self::get_values($hash);
