@@ -2,7 +2,7 @@
 
 class UsersController {
 
-    public function new() {
+    public static function new() {
         echo 'user controller -> new method';
     }
 
