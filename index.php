@@ -1,5 +1,7 @@
 <?php
 
+// $request_uri = explode('?', $_SERVER['REQUEST_URI'], 2);
+
 $controller = 'users_controller';
 $class = 'UsersController';
 $method = 'new';
