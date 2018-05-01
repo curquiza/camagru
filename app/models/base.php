@@ -31,7 +31,6 @@ class Base {
     }
 
     // ====== PRIVATE METHODS FOR ORM ======
-
     private static function sql_request($string) {
         $db = new SQLiteConnection();
         $pdo = $db->connect();
