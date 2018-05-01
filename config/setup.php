@@ -28,7 +28,7 @@ class SQLiteCreateTable {
          );',
          'CREATE TABLE IF NOT EXISTS comments (
            comment_id   INTEGER PRIMARY KEY,
-           content      TEXT NOT NULL,
+           message      TEXT NOT NULL,
            created_at   DATETIME,
            updated_at   DATETIME,
            user_id      INTEGER,
