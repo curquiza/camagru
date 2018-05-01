@@ -13,7 +13,7 @@ class SQLiteCreateTable {
     public function createTables() {
         $commands = [
           'CREATE TABLE IF NOT EXISTS users (
-            user_id      INTEGER PRIMARY KEY,
+            id      INTEGER PRIMARY KEY,
             email        TEXT NOT NULL,
             pseudo       TEXT NOT NULL,
             password     TEXT NOT NULL,
@@ -21,13 +21,13 @@ class SQLiteCreateTable {
             created_at   DATETIME
           );',
          'CREATE TABLE IF NOT EXISTS photos (
-           photo_id     INTEGER PRIMARY KEY,
+           id     INTEGER PRIMARY KEY,
            path         TEXT NOT NULL,
            created_at   DATETIME,
            user_id      INTEGER
          );',
          'CREATE TABLE IF NOT EXISTS comments (
-           comment_id   INTEGER PRIMARY KEY,
+           id   INTEGER PRIMARY KEY,
            message      TEXT NOT NULL,
            created_at   DATETIME,
            updated_at   DATETIME,
@@ -35,7 +35,7 @@ class SQLiteCreateTable {
            photo_id     INTEGER
          );',
          'CREATE TABLE IF NOT EXISTS likes (
-           like_id      INTEGER PRIMARY KEY,
+           id      INTEGER PRIMARY KEY,
            user_id      INTEGER,
            photo_id     INTEGER
          );',
