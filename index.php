@@ -41,7 +41,7 @@ class RoutesParser {
         $match = $this->find_a_match();
         if (isset($match)) {
             echo 'y a match' . PHP_EOL;
-            $array = ['controller' => $match['controller'], 'action' => $match['action'], 'params' => []];
+            $array = ['controller' => $match['controller'], 'action' => $match['action'], 'params' => $_GET];
             return ($array);
         }
         echo 'y a PAS match' . PHP_EOL;
@@ -56,17 +56,29 @@ class RoutesParser {
 
     private function compare_url($route_url) {
         $regex_url = $this->regex_parser($route_url);
-        $url_slash = $this->trailing_slash($this->url);
+        $url_sanitized = $this->sanitize_url();
         echo 'regex_url = ' . $regex_url . PHP_EOL;
-        echo '$url_slash = ' . $url_slash . PHP_EOL;
-        echo 'preg_match = ' . preg_match($regex_url, $url_slash) . PHP_EOL;
-        return preg_match($regex_url, $url_slash);
+        echo '$url_sanitized = ' . $url_sanitized . PHP_EOL;
+        echo 'preg_match = ' . preg_match($regex_url, $url_sanitized) . PHP_EOL;
+        return preg_match($regex_url, $url_sanitized);
     }
 
     private function regex_parser($str) {
         $str = str_replace('/', '\/', $str);
         $str = str_replace(':id', '\d+', $str);
         return '/' . $str . '$/';
+    }
+
+    private function sanitize_url() {
+        $sanatized_url = $this->url_without_params();
+        return $this->trailing_slash($sanatized_url);
+    }
+
+    private function url_without_params() {
+        if (strpos($this->url, '?') !== false)
+            return substr($this->url, 0, strpos($this->url, '?'));
+        else
+            return $this->url;
     }
 
     private function trailing_slash($url) {
@@ -111,7 +123,6 @@ class Router {
         return ucfirst($name) . 'Controller';
     }
 }
-
 Router::go_to($_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD']);
 // Router::go_to('/users/new', 'GET');
 
