@@ -112,8 +112,8 @@ class Router {
     }
 }
 
-Router::go_to($_SERVER['RESQUEST_URI'], $_SERVER['RESQUEST_METHOD']);
-// Router::go_to('/users/new/', 'GET');
+Router::go_to($_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD']);
+// Router::go_to('/users/new', 'GET');
 
 ?>
 <!-- <!DOCTYPE html>
