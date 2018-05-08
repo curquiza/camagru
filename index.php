@@ -3,17 +3,27 @@
 class RoutesParser {
 
     const ROUTES = [
-        ['url' => '/users/:id/',      'method' => 'get',    'controller' => 'user', 'action' => 'show'],
-        ['url' => '/users/new/',      'method' => 'get',    'controller' => 'user', 'action' => 'new'],
-        ['url' => '/users/:id/edit/', 'method' => 'get',    'controller' => 'user', 'action' => 'edit'],
-        ['url' => '/users/',          'method' => 'post',   'controller' => 'user', 'action' => 'create'],
-        ['url' => '/users/:id/',      'method' => 'patch',  'controller' => 'user', 'action' => 'update'],
-        ['url' => '/users/:id/',      'method' => 'delete', 'controller' => 'user', 'action' => 'destroy'],
-        ['url' => '/photos/:id/comments/', 'method' => 'get', 'controller' => 'comment', 'action' => 'index'],
-        ['url' => '/photos/:id/comments/:id/edit/', 'method' => 'get', 'controller' => 'comment', 'action' => 'edit'],
-        ['url' => '/photos/:id/comments/', 'method' => 'post', 'controller' => 'comment', 'action' => 'create'],
-        ['url' => '/photos/:id/comments/:id/', 'method' => 'patch', 'controller' => 'comment', 'action' => 'update'],
-        ['url' => '/photos/:id/comments/:id/', 'method' => 'delete', 'controller' => 'comment', 'action' => 'delete']
+        ['url' => '/users/:id/',                    'method' => 'get',    'controller' => 'users',    'action' => 'show'],
+        ['url' => '/users/new/',                    'method' => 'get',    'controller' => 'users',    'action' => 'new'],
+        ['url' => '/users/:id/edit/',               'method' => 'get',    'controller' => 'users',    'action' => 'edit'],
+        ['url' => '/users/',                        'method' => 'post',   'controller' => 'users',    'action' => 'create'],
+        ['url' => '/users/:id/',                    'method' => 'patch',  'controller' => 'users',    'action' => 'update'],
+        ['url' => '/users/:id/',                    'method' => 'delete', 'controller' => 'users',    'action' => 'destroy'],
+
+        ['url' => '/photos/',                       'method' => 'get',    'controller' => 'photos',   'action' => 'index'],
+        ['url' => '/photos/:id/',                   'method' => 'get',    'controller' => 'photos',   'action' => 'show'],
+        ['url' => '/photos/new/',                   'method' => 'get',    'controller' => 'photos',   'action' => 'new'],
+        ['url' => '/photos/',                       'method' => 'post',   'controller' => 'photos',   'action' => 'create'],
+        ['url' => '/photos/:id/',                   'method' => 'delete', 'controller' => 'photos',   'action' => 'destroy'],
+
+        ['url' => '/photos/:id/comments/',          'method' => 'get',    'controller' => 'comments', 'action' => 'index'],
+        ['url' => '/photos/:id/comments/:id/edit/', 'method' => 'get',    'controller' => 'comments', 'action' => 'edit'],
+        ['url' => '/photos/:id/comments/',          'method' => 'post',   'controller' => 'comments', 'action' => 'create'],
+        ['url' => '/photos/:id/comments/:id/',      'method' => 'patch',  'controller' => 'comments', 'action' => 'update'],
+        ['url' => '/photos/:id/comments/:id/',      'method' => 'delete', 'controller' => 'comments', 'action' => 'delete'],
+
+        ['url' => '/photos/:id/likes/',             'method' => 'post',   'controller' => 'likes',    'action' => 'create'],
+        ['url' => '/photos/:id/likes:id/',          'method' => 'delete', 'controller' => 'likes',    'action' => 'destroy']
     ];
 
     private $url;
