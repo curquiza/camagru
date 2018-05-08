@@ -9,6 +9,7 @@ class RoutesParser {
         ['url' => '/users/',                        'method' => 'post',   'controller' => 'users',    'action' => 'create'],
         ['url' => '/users/:id/',                    'method' => 'patch',  'controller' => 'users',    'action' => 'update'],
         ['url' => '/users/:id/',                    'method' => 'delete', 'controller' => 'users',    'action' => 'destroy'],
+        // + user/:id/photos/
 
         ['url' => '/photos/',                       'method' => 'get',    'controller' => 'photos',   'action' => 'index'],
         ['url' => '/photos/:id/',                   'method' => 'get',    'controller' => 'photos',   'action' => 'show'],
@@ -23,7 +24,7 @@ class RoutesParser {
         ['url' => '/photos/:id/comments/:id/',      'method' => 'delete', 'controller' => 'comments', 'action' => 'delete'],
 
         ['url' => '/photos/:id/likes/',             'method' => 'post',   'controller' => 'likes',    'action' => 'create'],
-        ['url' => '/photos/:id/likes:id/',          'method' => 'delete', 'controller' => 'likes',    'action' => 'destroy']
+        ['url' => '/photos/:id/likes/:id/',         'method' => 'delete', 'controller' => 'likes',    'action' => 'destroy']
     ];
 
     private $url;
@@ -40,11 +41,10 @@ class RoutesParser {
         $match = $this->find_a_match();
         if (isset($match)) {
             echo 'y a match' . PHP_EOL;
-            $array = ['controller' => $match['controller'], 'action' => $match['action']];
+            $array = ['controller' => $match['controller'], 'action' => $match['action'], 'params' => []];
             return ($array);
         }
         echo 'y a PAS match' . PHP_EOL;
-        return NULL; //
     }
 
     private function find_a_match() {
@@ -52,7 +52,6 @@ class RoutesParser {
             if ($this->compare_method($route['method']) && $this->compare_url($route['url']))
                 return $route;
         }
-        return NULL;
     }
 
     private function compare_url($route_url) {
@@ -80,13 +79,42 @@ class RoutesParser {
         return (strtoupper($route_method) === $this->method);
     }
 
-
 }
 
-$a = new RoutesParser('/photos/48769/comments/6987/', 'PATCH');
-$titi = $a->redirection_instructions();
-echo "FINAL :" . PHP_EOL;
-print_r ($titi);
+class Router {
+
+    public static function go_to($uri, $method) {
+        $url_parser = new RoutesParser($uri, $method);
+        $redirect_info = $url_parser->redirection_instructions();
+        self::redirection($redirect_info);
+    }
+
+    private static function redirection($redirect_info) {
+        if (isset($redirect_info)) {
+            self::require_controller($redirect_info);
+            self::call_controller_method($redirect_info);
+        }
+        else
+            ; // renvoyer sur page 404
+    }
+
+    private static function require_controller($redirect_info) {
+        require_once('app/controllers/' . $redirect_info['controller'] . '_controller.php');
+    }
+
+    private static function call_controller_method($redirect_info) {
+        $array = [self::controller_name($redirect_info['controller']), $redirect_info['action']];
+        call_user_func_array($array, $redirect_info['params']);
+    }
+
+    private static function controller_name($name) {
+        return ucfirst($name) . 'Controller';
+    }
+}
+
+Router::go_to($_SERVER['RESQUEST_URI'], $_SERVER['RESQUEST_METHOD']);
+// Router::go_to('/users/new/', 'GET');
+
 ?>
 <!-- <!DOCTYPE html>
 <html>
