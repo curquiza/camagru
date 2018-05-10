@@ -135,7 +135,6 @@ class ParamsParser {
                 $_GET[$key] = $value;
                 break;
         }
-
     }
 
 }
