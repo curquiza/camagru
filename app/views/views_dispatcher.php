@@ -17,9 +17,14 @@ class View
         $this->data[$key] = $value;
     }
 
-    public function __destruct()
-    {
+    public function render_layout() {
         extract($this->data);
         include($this->render);
     }
+
+    // public function __destruct()
+    // {
+    //     extract($this->data);
+    //     include($this->render);
+    // }
 }
