@@ -107,7 +107,7 @@ class Router {
             self::call_controller_method($redirect_info);
         }
         else
-            ; // renvoyer sur page 404
+            echo '404'; // renvoyer sur page 404
     }
 
     private static function require_controller($redirect_info) {
@@ -123,4 +123,4 @@ class Router {
         return ucfirst($name) . 'Controller';
     }
 }
-// 
+//
