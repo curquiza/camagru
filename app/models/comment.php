@@ -1,7 +1,5 @@
 <?php
 
-require_once 'base.php';
-
 class Comment extends Base {
 
     protected $id;
@@ -14,11 +12,3 @@ class Comment extends Base {
     }
 
 }
-
-$hash = array();
-$hash['message'] = 'yoyoy';
-$hash['user_id'] = 123;
-
-// Comment::create($hash);
-// Comment::update(1, $hash);
-Comment::destroy(1);
