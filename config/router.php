@@ -123,5 +123,3 @@ class Router {
         return ucfirst($name) . 'Controller';
     }
 }
-
-?>
