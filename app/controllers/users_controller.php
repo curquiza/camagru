@@ -3,7 +3,10 @@
 class UsersController {
 
     public static function new() {
-        echo 'user controller -> new method';
+        echo 'Controller: user - Action: new' . PHP_EOL;
     }
 
+    public static function show() {
+        echo 'Controller: user - Action: show' . PHP_EOL;
+    }
 }
