@@ -41,7 +41,7 @@ class RoutesParser {
         $match = $this->find_a_match();
         if (isset($match)) {
             // echo 'y a match' . PHP_EOL;
-            $array = ['controller' => $match['controller'], 'action' => $match['action'], 'params' => $_GET];
+            $array = ['controller' => $match['controller'], 'action' => $match['action']];
             return ($array);
         }
         // echo 'y a PAS match' . PHP_EOL;
@@ -75,10 +75,8 @@ class RoutesParser {
     }
 
     private function url_without_params() {
-        if (strpos($this->url, '?') !== false)
-            return substr($this->url, 0, strpos($this->url, '?'));
-        else
-            return $this->url;
+        $array = parse_url($this->url);
+        return $array['path'];
     }
 
     private function trailing_slash($url) {
@@ -116,7 +114,7 @@ class Router {
 
     private static function call_controller_method($redirect_info) {
         $array = [self::controller_name($redirect_info['controller']), $redirect_info['action']];
-        call_user_func_array($array, $redirect_info['params']);
+        call_user_func_array($array, array());
     }
 
     private static function controller_name($name) {
