@@ -1,12 +1,5 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<link rel="stylesheet" href="css/spectre.css">
-	<link rel="stylesheet" href="css/spectre-exp.css">
-	<link rel="stylesheet" href="css/spectre-icons.css">
-</head>
+<?php
 
-<body>
-	<h1> COCO </h1>
-</body>
-</html>
+require_once 'config/router.php';
+
+Router::go_to($_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD']);
