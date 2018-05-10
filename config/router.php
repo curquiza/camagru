@@ -93,14 +93,20 @@ class RoutesParser {
 
 class ParamsParser {
 
-    public static function distribute_ids() {
+    public static function distribute($controller, $action) {
         $url_parts = self::url_parts();
         self::fill_tab_with_ids($url_parts);
+        self::fill_tab_with_redirect_info($controller, $action);
     }
 
     private static function url_parts() {
         $tmp = parse_url($_SERVER['REQUEST_URI']);
         return explode('/', $tmp['path']);
+    }
+
+    private static function fill_tab_with_redirect_info($controller, $action) {
+        self::add_in_tab_method('controller', $controller);
+        self::add_in_tab_method('action', $action);
     }
 
     private static function fill_tab_with_ids($url_parts) {
@@ -149,7 +155,7 @@ class Router {
 
     private static function redirection($redirect_info) {
         if (isset($redirect_info)) {
-            ParamsParser::distribute_ids();
+            ParamsParser::distribute($redirect_info['controller'], $redirect_info['action']);
             self::require_controller($redirect_info);
             self::call_controller_method($redirect_info);
         }
