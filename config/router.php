@@ -91,6 +91,55 @@ class RoutesParser {
 
 }
 
+class ParamsParser {
+
+    public static function distribute_ids() {
+        $url_parts = self::url_parts();
+        self::fill_tab_with_ids($url_parts);
+    }
+
+    private static function url_parts() {
+        $tmp = parse_url($_SERVER['REQUEST_URI']);
+        return explode('/', $tmp['path']);
+    }
+
+    private static function fill_tab_with_ids($url_parts) {
+        $previous = '';
+        foreach ($url_parts as $part) {
+            if (ctype_digit($part)) {
+                $id_name = self::get_id_name($previous);
+                self::add_in_tab_method($id_name, $part);
+            }
+            $previous = $part;
+        }
+    }
+
+    private static function get_id_name($name) {
+        $singular_name = rtrim($name, 's');
+        return $singular_name . "_id";
+    }
+
+    private static function add_in_tab_method($key, $value) {
+        $method = $_SERVER['REQUEST_METHOD'];
+        switch ($method) {
+            case 'GET':
+                $_GET[$key] = $value;
+                break;
+            case 'POST':
+                $_GET[$key] = $value;
+                break;
+            case 'PATCH':
+                $_GET[$key] = $value;
+                break;
+            case 'DELETE':
+                $_GET[$key] = $value;
+                break;
+        }
+
+    }
+
+}
+
 class Router {
 
     public static function go_to($uri, $method) {
@@ -101,6 +150,7 @@ class Router {
 
     private static function redirection($redirect_info) {
         if (isset($redirect_info)) {
+            ParamsParser::distribute_ids();
             self::require_controller($redirect_info);
             self::call_controller_method($redirect_info);
         }
@@ -121,4 +171,3 @@ class Router {
         return ucfirst($name) . 'Controller';
     }
 }
-//
