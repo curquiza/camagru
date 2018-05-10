@@ -1,7 +1,5 @@
 <?php
 
-require_once 'app/models/connection.php';
-
 class Base {
 
     // ====== GETTER ======

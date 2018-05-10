@@ -1,6 +1,6 @@
 <?php
 
-require_once 'app/models/connection.php';
+require_once __DIR__ . '/init.php';
 
 class SQLiteCreateTable {
 
