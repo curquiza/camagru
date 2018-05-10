@@ -33,18 +33,18 @@ class RoutesParser {
     function __construct($url, $method) {
         $this->url = $url;
         $this->method = $method;
-        echo 'URL = ' . $url . PHP_EOL;
-        echo 'METHOD = ' . $method . PHP_EOL;
+        // echo 'URL = ' . $url . PHP_EOL;
+        // echo 'METHOD = ' . $method . PHP_EOL;
     }
 
     public function redirection_instructions() {
         $match = $this->find_a_match();
         if (isset($match)) {
-            echo 'y a match' . PHP_EOL;
+            // echo 'y a match' . PHP_EOL;
             $array = ['controller' => $match['controller'], 'action' => $match['action'], 'params' => $_GET];
             return ($array);
         }
-        echo 'y a PAS match' . PHP_EOL;
+        // echo 'y a PAS match' . PHP_EOL;
     }
 
     private function find_a_match() {
@@ -57,9 +57,9 @@ class RoutesParser {
     private function compare_url($route_url) {
         $regex_url = $this->regex_parser($route_url);
         $url_sanitized = $this->sanitize_url();
-        echo 'regex_url = ' . $regex_url . PHP_EOL;
-        echo '$url_sanitized = ' . $url_sanitized . PHP_EOL;
-        echo 'preg_match = ' . preg_match($regex_url, $url_sanitized) . PHP_EOL;
+        // echo 'regex_url = ' . $regex_url . PHP_EOL;
+        // echo '$url_sanitized = ' . $url_sanitized . PHP_EOL;
+        // echo 'preg_match = ' . preg_match($regex_url, $url_sanitized) . PHP_EOL;
         return preg_match($regex_url, $url_sanitized);
     }
 
@@ -123,3 +123,4 @@ class Router {
         return ucfirst($name) . 'Controller';
     }
 }
+// 
