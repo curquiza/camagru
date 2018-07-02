@@ -169,7 +169,7 @@ class Router {
 
     private static function call_controller_method($redirect_info) {
         $array = [self::controller_name($redirect_info['controller']), $redirect_info['action']];
-        call_user_func_array($array, array());
+        call_user_func($array);
     }
 
     private static function controller_name($name) {
